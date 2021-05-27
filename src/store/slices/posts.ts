@@ -1,8 +1,10 @@
 import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
+import { Post } from '../../models/Post';
+
 interface PostsState {
-  posts?: [];
+  posts?: Post[];
   isLoading?: boolean;
   hasErrors?: boolean;
 }
@@ -18,7 +20,7 @@ const postsSlice = createSlice({
     getPosts(state: PostsState) {
       state.isLoading = true;
     },
-    getPostsSuccess(state: PostsState, action: PayloadAction<[]>) {
+    getPostsSuccess(state: PostsState, action: PayloadAction<Post[]>) {
       state.posts = action.payload;
       state.isLoading = false;
       state.hasErrors = false;

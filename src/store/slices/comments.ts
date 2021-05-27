@@ -1,8 +1,10 @@
 import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
+import { Comment } from '../../models/Comment';
+
 interface TypedComments {
-  comments?: [];
+  comments?: Comment[];
   isLoading?: boolean;
   hasErrors?: boolean;
 }
@@ -20,7 +22,7 @@ const commentsSlice = createSlice({
     getComments(state: TypedComments) {
       state.isLoading = true;
     },
-    getCommentsSuccess(state: TypedComments, action: PayloadAction<[]>) {
+    getCommentsSuccess(state: TypedComments, action: PayloadAction<Comment[]>) {
       state.comments = action.payload;
       state.isLoading = false;
       state.hasErrors = false;

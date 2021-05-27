@@ -22,7 +22,7 @@ const postSlice = createSlice({
     getPost(state: PostState) {
       state.isLoading = true;
     },
-    getPostSuccess(state: PostState, action: PayloadAction<{}>) {
+    getPostSuccess(state: PostState, action: PayloadAction<Post>) {
       state.post = action.payload;
       state.isLoading = false;
       state.hasErrors = false;
