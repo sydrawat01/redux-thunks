@@ -2,9 +2,9 @@ import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
 interface TypedComments {
-  comments: [];
-  isLoading: boolean;
-  hasErrors: boolean;
+  comments?: [];
+  isLoading?: boolean;
+  hasErrors?: boolean;
 }
 
 const initialState: TypedComments = {

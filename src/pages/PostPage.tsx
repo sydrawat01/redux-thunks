@@ -1,5 +1,4 @@
 import { FC, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { postSelector, fetchPost } from '../store/slices/post';
@@ -7,6 +6,8 @@ import { commentsSelector, fetchComments } from '../store/slices/comments';
 
 import Post from '../components/Post';
 import Comment from '../components/Comment';
+import { Comment as TypedComment } from '../models/Comment';
+
 import { match } from 'react-router';
 
 const PostPage: FC<{ match: match }> = ({ match }) => {
@@ -23,8 +24,7 @@ const PostPage: FC<{ match: match }> = ({ match }) => {
   } = useAppSelector(commentsSelector);
 
   useEffect(() => {
-    const urlId = match.params;
-    const id: number = Object.values<number>(urlId)[0];
+    const id: number = Object.values<number>(match.params)[0];
 
     dispatch(fetchComments(id));
     dispatch(fetchPost(id));
@@ -41,8 +41,8 @@ const PostPage: FC<{ match: match }> = ({ match }) => {
     if (commentIsLoading) return <p>Comments are loading ...</p>;
     if (commentHasErrors) return <p>Unable to load comments!</p>;
 
-    return comments.map((comment) => (
-      <Comment key={uuidv4()} comment={comment} />
+    return comments?.map((comment: TypedComment) => (
+      <Comment key={comment.id} comment={comment} />
     ));
   };
 

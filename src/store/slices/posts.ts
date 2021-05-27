@@ -1,12 +1,12 @@
 import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-interface TypedState {
-  posts: [];
-  isLoading: boolean;
-  hasErrors: boolean;
+interface PostsState {
+  posts?: [];
+  isLoading?: boolean;
+  hasErrors?: boolean;
 }
-const initialState: TypedState = {
+const initialState: PostsState = {
   posts: [],
   isLoading: false,
   hasErrors: false,
@@ -15,15 +15,15 @@ const postsSlice = createSlice({
   name: 'Posts',
   initialState,
   reducers: {
-    getPosts(state: TypedState) {
+    getPosts(state: PostsState) {
       state.isLoading = true;
     },
-    getPostsSuccess(state: TypedState, action: PayloadAction<[]>) {
+    getPostsSuccess(state: PostsState, action: PayloadAction<[]>) {
       state.posts = action.payload;
       state.isLoading = false;
       state.hasErrors = false;
     },
-    getPostsFailed(state: TypedState) {
+    getPostsFailed(state: PostsState) {
       state.isLoading = false;
       state.hasErrors = true;
     },
